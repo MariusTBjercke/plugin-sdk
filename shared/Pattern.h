@@ -36,6 +36,11 @@ namespace plugin {
             }
             patternMap->emplace(bytes, a);
         return_addr:
+            // A miss must stay zero. Rebasing it first yields
+            // STARTING_ADDRESS - base, which is non-zero whenever the game is
+            // relocated, and Read() then dereferences address `offset`.
+            if (!a)
+                return 0x0;
             a -= GetBaseAddress();
             a += STARTING_ADDRESS;
             return a ? a + offset : 0x0;
@@ -58,6 +63,8 @@ namespace plugin {
             }
             modulePatternMap->emplace(bytes, a);
 return_addr:
+            if (!a)
+                return 0x0;
             a -= GetBaseAddress();
             a += STARTING_ADDRESS;
             return a ? a + offset : 0x0;

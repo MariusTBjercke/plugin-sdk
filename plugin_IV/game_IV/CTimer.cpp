@@ -14,7 +14,8 @@ uint32_t& CTimer::m_snPreviousTimeInMilliseconds = *gpatternt(uint32_t, "A3 ? ? 
 uint32_t& CTimer::m_snTimeInMilliseconds = *gpatternt(uint32_t, "8B 0D ? ? ? ? 89 0D ? ? ? ? F3 0F 10 05", 2);
 bool& CTimer::m_CodePause = *gpatternt(bool, "0A 05 ? ? ? ? 74 0D 80 3D ? ? ? ? ? 0F 84 ? ? ? ? A1", 2);
 bool& CTimer::m_UserPause = *gpatternt(bool, "0A 05 ? ? ? ? 0A 05 ? ? ? ? 74 0D 80 3D ? ? ? ? ? 0F 84 ? ? ? ? A1", 2);
-int32_t& CTimer::m_FrameCounter = *gpatternt(int32_t, "FF 05 ? ? ? ? F3 0F 2C C0", 2);
+// Read from the reset store: FusionFix 5.1 replaces the increment in CTimer::Update.
+int32_t& CTimer::m_FrameCounter = *gpatternt(int32_t, "80 3F C7 05 ? ? ? ? 00 00 00 00 C7 05 ? ? ? ? 00 00 00 00 C3", 4);
 
 void CTimer::SetTimeScale(float scale) {
     plugin::CallDyn(gpattern("F3 0F 10 44 24 ? F3 0F 11 05 ? ? ? ? F3 0F 11 05 ? ? ? ? C3 CC CC CC CC CC CC CC CC CC 55"), scale);

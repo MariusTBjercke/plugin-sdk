@@ -14,11 +14,13 @@ int32_t CFont::DetailIndex() {
 }
 
 float CFont::GetStringWidth(const wchar_t* str, bool spaces) {
-    return plugin::CallAndReturnDyn<float>(gpattern("8B 44 24 04 85 C0 75 03 D9 EE C3 89 44 24 04"), str, spaces);
+    // Anchored past the first six bytes, which FusionFix 5.1 overwrites with an inline hook.
+    return plugin::CallAndReturnDyn<float>(plugin::pattern::Get("75 03 D9 EE C3 89 44 24 04", -6), str, spaces);
 }
 
 void CFont::PrintString(float x, float y, const wchar_t* str, int32_t arg1, int32_t arg2) {
-    plugin::CallDyn(gpattern("55 8B EC 83 E4 F8 83 EC 58 A1 ? ? ? ? 33 C4 89 44 24 54 56 57 8B 7D 10"), x, y, str, arg1, arg2);
+    // Anchored past the first six bytes, which FusionFix 5.1 overwrites with an inline hook.
+    plugin::CallDyn(plugin::pattern::Get("83 EC 58 A1 ? ? ? ? 33 C4 89 44 24 54 56 57 8B 7D 10", -6), x, y, str, arg1, arg2);
 }
 
 void CFont::PrintStringFromBottom(float x, float y, const wchar_t* str, int32_t arg1, int32_t arg2) {

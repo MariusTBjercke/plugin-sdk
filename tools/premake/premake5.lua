@@ -191,6 +191,10 @@ function pluginSdkStaticLibProject(projectName, sdkdir, outName, isPluginProject
         optimize "On"
         linktimeoptimization "On"
         symbols "Off"
+        -- Without it assert() stays live: a pattern that matches other than
+        -- once raises a dialog on the player's machine and __FILE__ ships the
+        -- build machine's paths.
+        defines "NDEBUG"
     filter "zDebug"
         symbols "On"
         defines "DEBUG"

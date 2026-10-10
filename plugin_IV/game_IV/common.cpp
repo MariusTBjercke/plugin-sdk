@@ -12,7 +12,7 @@ int32_t& gGameEpisode = *gpatternt(int32_t, "C7 05 ? ? ? ? ? ? ? ? C7 05 ? ? ? ?
 
 static uint32_t CPlayerPed__FindPlayerPedAddr;
 CPlayerPed* FindPlayerPed(int32_t id) {
-    return plugin::CallAndReturnDyn<CPlayerPed*>(gpattern("8B 44 24 04 85 C0 75 18 A1"), id);
+    return plugin::CallAndReturnDyn<CPlayerPed*>(gpattern("8B 44 24 04 85 C0 75 18 A1 | 8B 44 24 04 85 C0 75 15 A1 ? ? ? ? 83 F8 FF 74"), id);
 }
 
 static uint32_t CPlayerPed__FindPlayerVehicleAddr;

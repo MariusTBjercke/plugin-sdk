@@ -43,7 +43,7 @@ void CPed::SetRelationship(int32_t level, int32_t group) {
 }
 
 CControl* CPed::GetControlFromPlayer() {
-    return plugin::CallMethodAndReturnDyn<CControl*>(gpattern("80 B9 ? ? ? ? ? 75 0D 80 B9 ? ? ? ? ? 0F 85 ? ? ? ? 33 C0"), this);
+    return plugin::CallMethodAndReturnDyn<CControl*>(gpattern("80 B9 ? ? ? ? ? 75 0D 80 B9 ? ? ? ? ? 0F 85 ? ? ? ? 33 C0 | 80 B9 18 02 00 00 00 75 0E 80 B9 19"), this);
 }
 
 CVehicle* CPed::GetVehiclePedWouldEnter(CPed* ped, rage::Vector3 const& pos, bool arg2) {

@@ -6,9 +6,9 @@
 */
 #include "audRadioAudioEntity.h"
 
-audRadioAudioEntity& g_RadioAudioEntity = *gpatternt(audRadioAudioEntity, "B9 ? ? ? ? E9 ? ? ? ? CC CC B9 ? ? ? ? E9 ? ? ? ? CC CC CC CC CC CC B9 ? ? ? ? E8", 1);
+audRadioAudioEntity& g_RadioAudioEntity = *gpatternt(audRadioAudioEntity, "B9 ? ? ? ? E9 ? ? ? ? CC CC B9 ? ? ? ? E9 ? ? ? ? CC CC CC CC CC CC B9 ? ? ? ? E8 | B9 ? ? ? ? E8 ? ? ? ? 3B 6C", 1);
 
-bool& audRadioAudioEntity::ms_IsMobilePhoneRadioActive = *gpatternt(bool, "C6 05 ? ? ? ? ? 8B 46 28 5F", 2);
+bool& audRadioAudioEntity::ms_IsMobilePhoneRadioActive = *gpatternt(bool, "C6 05 ? ? ? ? ? 8B 46 28 5F | 38 05 ? ? ? ? 75 09 66 C7 86 98", 2);
 
 void audRadioAudioEntity::RetuneToStation(const char* stationName) {
     plugin::CallMethodDyn(gpattern("8B 44 24 04 56 8B F1 BA"), this, stationName);
@@ -19,7 +19,7 @@ void audRadioAudioEntity::RetuneToStation(uint32_t hashName) {
 }
 
 void audRadioAudioEntity::RetuneToStationIndex(int32_t index) {
-    plugin::CallMethodDyn(gpattern("8B 44 24 04 89 81 ? ? ? ? C2 04 00 CC CC CC 0F B6 0D"), this, index);
+    plugin::CallMethodDyn(gpattern("8B 44 24 04 89 81 ? ? ? ? C2 04 00 CC CC CC 0F B6 0D | 8B 44 24 04 89 81 80 00 00 00 C2 04"), this, index);
 }
 
 void audRadioAudioEntity::PauseRadio() {
@@ -31,7 +31,7 @@ void audRadioAudioEntity::UnpauseRadio() {
 }
 
 int32_t audRadioAudioEntity::GetAudibleMusicTrackTextId() {
-    return plugin::CallMethodAndReturnDyn<int32_t>(gpattern("83 EC 08 56 6A 00"), this);
+    return plugin::CallMethodAndReturnDyn<int32_t>(gpattern("83 EC 08 56 6A 00 | 83 EC 08 56 6A 00 6A 00 8B F1 E8 ? ? ? ? 83"), this);
 }
 
 void audRadioAudioEntity::RetuneRadioUpDown(int8_t up) {
@@ -39,7 +39,7 @@ void audRadioAudioEntity::RetuneRadioUpDown(int8_t up) {
 }
 
 void audRadioAudioEntity::TurnOff(int16_t arg1) {
-    plugin::CallDyn(gpattern("83 EC 10 80 7C 24"), arg1);
+    plugin::CallDyn(gpattern("83 EC 10 80 7C 24 | 33 C0 83 EC 10 38 44 24 14 74 37 0F"), arg1);
 }
 
 void audRadioAudioEntity::TurnOn(int16_t arg1) {

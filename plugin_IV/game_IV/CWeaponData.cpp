@@ -7,7 +7,7 @@
 #include "CWeaponData.h"
 
 CAmmoData* CWeaponData::GetAmmoData() {
-    return plugin::CallMethodAndReturnDyn<CAmmoData*, CWeaponData*>(gpattern("8B 41 14 85 C0 74 07"), this);
+    return plugin::CallMethodAndReturnDyn<CAmmoData*, CWeaponData*>(gpattern("8B 41 14 85 C0 74 07 | 8B 41 2C 85 C0 74 07 8B 80 5C 02 00"), this);
 }
 
 CAmmoData* CWeaponData::GetAmmoDataExtraCheck() {
@@ -15,7 +15,7 @@ CAmmoData* CWeaponData::GetAmmoDataExtraCheck() {
 }
 
 void CWeaponData::SetCurrentWeapon(int32_t arg1, int32_t slot, bool arg3, CPed* ped) {
-    plugin::CallMethodDyn(gpattern("83 EC 28 A1 ? ? ? ? 33 C4 89 44 24 24 53 8B 5C 24 30 55"), this, arg1, slot, arg3, ped);
+    plugin::CallMethodDyn(gpattern("83 EC 28 A1 ? ? ? ? 33 C4 89 44 24 24 53 8B 5C 24 30 55 | 83 EC 24 53 55 8B 6C 24 30 83 FD 17"), this, arg1, slot, arg3, ped);
 }
 
 int32_t CWeaponData::GetAmountOfAmmunition(int32_t weaponSlot) {

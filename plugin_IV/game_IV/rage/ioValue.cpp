@@ -7,7 +7,7 @@
 #include "ioValue.h"
 
 bool rage::ioValue::IsPressed() {
-    return plugin::CallMethodAndReturnDyn<bool>(gpattern("8A 51 04 8A 41 06 32 C2 3C 7F 77 0C"), this);
+    return plugin::CallMethodAndReturnDyn<bool>(gpattern("8A 51 04 8A 41 06 32 C2 3C 7F 77 0C | 8A 41 04 8A 51 06 32 D0 80 FA 7F 77"), this);
 }
 
 bool rage::ioValue::IsDown() {

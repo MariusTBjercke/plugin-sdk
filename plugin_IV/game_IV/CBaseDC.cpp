@@ -9,7 +9,7 @@
 int32_t& CBaseDC::m_currCommandIdx = *gpatternt(int32_t, "89 15 ? ? ? ? C7 01 ? ? ? ? 8B C1", 2);
 
 void* CBaseDC::operator new(std::size_t size) {
-    return plugin::CallAndReturnDyn<void*>(gpattern("53 56 57 8B 7C 24 10 FF 74 24 14"), size, 0);
+    return plugin::CallAndReturnDyn<void*>(gpattern("53 56 57 8B 7C 24 10 FF 74 24 14 | 8B 44 24 08 56 57 8B 7C 24 0C 8B F7"), size, 0);
 }
 
 void CBaseDC::InitStatic(CBaseDC* dc) {
@@ -17,5 +17,5 @@ void CBaseDC::InitStatic(CBaseDC* dc) {
 }
 
 void CBaseDC::Init() {
-    plugin::CallMethodDyn<CBaseDC*>(gpattern("56 57 8B F9 8B 07 FF 50 08 25"), this);
+    plugin::CallMethodDyn<CBaseDC*>(gpattern("56 57 8B F9 8B 07 FF 50 08 25 | 56 8B F1 8B 06 8B 50 08 57 FF D2 25"), this);
 }

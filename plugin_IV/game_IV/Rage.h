@@ -54,12 +54,12 @@
 
 template<typename T>
 T* GetD3DDevice() {
-    return *gpatternt(T*, "68 ? ? ? ? 8B 08 68 ? ? ? ? 6A 14", 1);
+    return *gpatternt(T*, "68 ? ? ? ? 8B 08 68 ? ? ? ? 6A 14 | 83 3D ? ? ? ? ? 74 EF 8B 44 24 1C @1", 1);
 }
 
 template<typename T>
 T GetHWnd() {
-    return *gpatternt(T, "A1 ? ? ? ? 85 C0 74 08 57", 1);
+    return *gpatternt(T, "A1 ? ? ? ? 85 C0 74 08 57 | A1 ? ? ? ? 6A 01 56 57", 1);
 }
 
 namespace rage {

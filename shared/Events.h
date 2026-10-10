@@ -421,16 +421,16 @@ namespace plugin {
 #endif
 
 #ifdef GTAIV
-        static inline CdeclEvent <AddressList<0x5C12AD, H_CALL>, PRIORITY_AFTER, ArgPickNone, void(const char*)> initGameEvent{ { "E8 ? ? ? ? 83 C4 ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? 6A" } };
-        static inline CdeclEvent <AddressList<0x5C2B7A, H_CALL>, PRIORITY_AFTER, ArgPickNone, void()> gameProcessEvent{ { "E8 ? ? ? ? 80 3D ? ? ? ? ? 74 09 C6 05" } };
+        static inline CdeclEvent <AddressList<0x5C12AD, H_CALL>, PRIORITY_AFTER, ArgPickNone, void(const char*)> initGameEvent{ { "E8 ? ? ? ? 83 C4 04 E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 | 68 ? ? ? ? E8 ? ? ? ? 83 C4 04 E8 ? ? ? ? E8 ? ? ? ? E8 @5" } };
+        static inline CdeclEvent <AddressList<0x5C2B7A, H_CALL>, PRIORITY_AFTER, ArgPickNone, void()> gameProcessEvent{ { "E8 ? ? ? ? 80 3D ? ? ? ? ? 74 09 C6 05 | E8 ? ? ? ? 38 1D ? ? ? ? 74 08" } };
         static inline CdeclEvent <AddressList<0x5E15BD, H_CALL>, PRIORITY_AFTER, ArgPickNone, uint32_t(uint32_t*)> drawMenuEvent{ { "E8 ? ? ? ? 6A 00 6A 0C E8 ? ? ? ? 83 C4 0C 85 C0 74 30" } };
-        static inline CdeclEvent <AddressList<0x5A6FC1, H_CALL>, PRIORITY_AFTER, ArgPickNone, uint32_t()> menuProcessEvent{ { "E8 ? ? ? ? 80 3D ? ? ? ? ? 74 28 E8 ? ? ? ? 84 C0" } };
+        static inline CdeclEvent <AddressList<0x5A6FC1, H_CALL>, PRIORITY_AFTER, ArgPickNone, uint32_t()> menuProcessEvent{ { "E8 ? ? ? ? 80 3D ? ? ? ? ? 74 28 E8 ? ? ? ? 84 C0 | E8 ? ? ? ? 80 3D ? ? ? ? 00 74 29" } };
 
-        static inline CdeclEvent <AddressList<0xB01893, H_CALL>, PRIORITY_AFTER, ArgPickNone, uint32_t()> drawingEvent{ { "E8 ? ? ? ? E8 ? ? ? ? 83 3D ? ? ? ? ? 74 6B" } };
+        static inline CdeclEvent <AddressList<0xB01893, H_CALL>, PRIORITY_AFTER, ArgPickNone, uint32_t()> drawingEvent{ { "E8 ? ? ? ? E8 ? ? ? ? 83 3D ? ? ? ? ? 74 6B | E8 ? ? ? ? E8 ? ? ? ? 83 3D ? ? ? ? 00 74 6D" } };
         static inline CdeclEvent <AddressList<0x8FEA20, H_CALL>, PRIORITY_AFTER, ArgPickNone, int32_t(int32_t)> drawHudEvent{ { "E8 ? ? ? ? 83 C4 04 83 F8 FD" } };
         static inline CdeclEvent <AddressList<0xE4DFEC, H_CALL>, PRIORITY_AFTER, ArgPickNone, void()> drawRadarEvent{ { "E8 ? ? ? ? E8 ? ? ? ? 6A 00 6A 14" } };
-        static inline CdeclEvent <AddressList<0x59D3FD, H_CALL>, PRIORITY_AFTER, ArgPickNone, uint32_t()> initEngineEvent{ { "E8 ? ? ? ? 6A 00 E8 ? ? ? ? 83 C4 04 C7 06" } };
-        static inline CdeclEvent <AddressList<0x401621, H_CALL>, PRIORITY_BEFORE, ArgPickNone, uint32_t()> shutdownEngineEvent{ { "E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? 8B 8C 24" } };
+        static inline CdeclEvent <AddressList<0x59D3FD, H_CALL>, PRIORITY_AFTER, ArgPickNone, uint32_t()> initEngineEvent{ { "E8 ? ? ? ? 6A 00 E8 ? ? ? ? 83 C4 04 C7 06 | E8 ? ? ? ? 6A 00 E8 ? ? ? ? 8B 46 1C" } };
+        static inline CdeclEvent <AddressList<0x401621, H_CALL>, PRIORITY_BEFORE, ArgPickNone, uint32_t()> shutdownEngineEvent{ { "E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? 8B 8C 24 | E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? 8B 8C 24 ? ? ? ? 5F 5B" } };
         static inline ThiscallEvent <AddressList<0xC34A85, H_CALL>, PRIORITY_BEFORE, ArgPickN<CAutomobile*, 0>, void(CAutomobile*)> automobileProcessEvent{ { "E8 ? ? ? ? 8B 46 28 C1 E8 0A 83 E0 1F 75 2A" } };
         static inline ThiscallEvent <AddressList<0x9E311F, H_CALL, 0x9E2FD8, H_CALL>, PRIORITY_BEFORE, ArgPickN<CPed*, 0>, void(CPed*)> pedRenderEvent{ { "E8 ? ? ? ? 8B 4C 24 ? 50 56 57 E8 ? ? ? ? EB", "E8 ? ? ? ? 8B CF 50 FF B3" } };
         static inline ThiscallEvent <AddressList<0x9ED835, H_CALL>, PRIORITY_BEFORE, ArgPickN<CPed*, 0>, uint32_t(CPed*)> pedProcessEvent{ { "E8 ? ? ? ? 8B 8E ? ? ? ? 56 81 C1 ? ? ? ? E8 ? ? ? ? F7 86" } };

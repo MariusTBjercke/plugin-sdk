@@ -9,7 +9,7 @@
 CText& TheText = *gpatternt(CText, "B9 ? ? ? ? E8 ? ? ? ? B0 01 C3 C7 05", 1);
 
 const wchar_t* CText::Get(const char* key) {
-    return plugin::CallMethodAndReturnDyn<const wchar_t*, CText*, const char*>(injector::GetBranchDestination(gpattern("E8 ? ? ? ? 50 68 ? ? ? ? 8D 84 24 ? ? ? ? 68 ? ? ? ? 50 E8 ? ? ? ? 83 C4 18")).as_int(), this, key);
+    return plugin::CallMethodAndReturnDyn<const wchar_t*, CText*, const char*>(injector::GetBranchDestination(gpattern("E8 ? ? ? ? 50 68 ? ? ? ? 8D 84 24 ? ? ? ? 68 ? ? ? ? 50 E8 ? ? ? ? 83 C4 18 | E8 ? ? ? ? 50 8D 84 24 ? ? ? ? 68 ? ? ? ? 50 BA ? ? ? ? E8 ? ? ? ? 83 C4 14")).as_int(), this, key);
 }
 
 const wchar_t* CText::Get(uint32_t hash, const char* key) {

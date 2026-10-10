@@ -6,7 +6,7 @@
 */
 #include "CPad.h"
 
-CPad* Pads = gpatternt(CPad, "BE ? ? ? ? BF ? ? ? ? 8D 64 24 00 8B CE E8 ? ? ? ? 81 C6 ? ? ? ? 4F 79 F0 5F 5E C3 CC CC CC CC CC CC CC CC CC CC CC CC CC 83 EC 10", 1); // [4]
+CPad* Pads = gpatternt(CPad, "BE ? ? ? ? BF ? ? ? ? 8D 64 24 00 8B CE E8 ? ? ? ? 81 C6 ? ? ? ? 4F 79 F0 5F 5E C3 CC CC CC CC CC CC CC CC CC CC CC CC CC 83 EC 10 | BE ? ? ? ? 6A 01 8B CE E8 ? ? ? ? 81 C6 BC 00 00 00 81 FE ? ? ? ? 7C E9 5E C3", 1); // [4]
 int32_t& CPad::CurrentPad = *gpatternt(int32_t, "8B 35 ? ? ? ? 39 35 ? ? ? ? 74 41", 2);
 
 void CControllerState::Clear() {

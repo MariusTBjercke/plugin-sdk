@@ -20,7 +20,7 @@ float CFont::GetStringWidth(const wchar_t* str, bool spaces) {
 
 void CFont::PrintString(float x, float y, const wchar_t* str, int32_t arg1, int32_t arg2) {
     // Anchored past the first six bytes, which FusionFix 5.1 overwrites with an inline hook.
-    plugin::CallDyn(plugin::pattern::Get("83 EC 58 A1 ? ? ? ? 33 C4 89 44 24 54 56 57 8B 7D 10", -6), x, y, str, arg1, arg2);
+    plugin::CallDyn(plugin::pattern::Get("83 EC 58 A1 ? ? ? ? 33 C4 89 44 24 54 56 57 8B 7D 10 | 83 EC 58 56 57 8B 7D 10 85 FF 0F 84", -6), x, y, str, arg1, arg2);
 }
 
 void CFont::PrintStringFromBottom(float x, float y, const wchar_t* str, int32_t arg1, int32_t arg2) {
@@ -28,23 +28,23 @@ void CFont::PrintStringFromBottom(float x, float y, const wchar_t* str, int32_t 
 }
 
 void CFont::SetOrientation(int32_t align) {
-    plugin::CallDyn(gpattern("E8 ? ? ? ? 8D 0C C0 8B 44 24 04 89 04 CD ? ? ? ? C3 CC CC CC CC CC CC CC CC CC CC CC CC E8 ? ? ? ? F3 0F 10 44 24"), align);
+    plugin::CallDyn(gpattern("E8 ? ? ? ? 8D 0C C0 8B 44 24 04 89 04 CD ? ? ? ? C3 CC CC CC CC CC CC CC CC CC CC CC CC E8 ? ? ? ? F3 0F 10 44 24 | E8 ? ? ? ? 8B 4C 24 04 8D 04 C0 89 0C C5 ? ? ? ? C3 CC CC CC CC CC CC CC CC CC CC CC CC E8"), align);
 }
 
 void CFont::SetFontStyle(int32_t style) {
-    plugin::CallDyn(gpattern("53 56 E8 ? ? ? ? 8B 5C 24 0C"), style);
+    plugin::CallDyn(gpattern("53 56 E8 ? ? ? ? 8B 5C 24 0C | E8 ? ? ? ? 8B 54 24 04 8D 0C C0"), style);
 }
 
 void CFont::SetColor(rage::Color32 const& col) {
-    plugin::CallDyn(gpattern("E8 ? ? ? ? F3 0F 10 05 ? ? ? ? 8D 14 C0 8B 44 24 04 0F B6 0C D5 ? ? ? ? 66 0F 6E C9 0F 5B C9 89 04 D5 ? ? ? ? 0F 2F C1 76 35"), col);
+    plugin::CallDyn(gpattern("E8 ? ? ? ? F3 0F 10 05 ? ? ? ? 8D 14 C0 8B 44 24 04 0F B6 0C D5 ? ? ? ? 66 0F 6E C9 0F 5B C9 89 04 D5 ? ? ? ? 0F 2F C1 76 35 | E8 ? ? ? ? 8B 4C 24 04 F3 0F 10 0D ? ? ? ? 8D 04 C0 03 C0 03 C0 0F B6 94 00 ? ? ? ? 03 C0 F3 0F 2A C2 0F 2F C8 89 88 ? ? ? ? 76 31"), col);
 }
 
 void CFont::SetDropColor(rage::Color32 const& col) {
-    plugin::CallDyn(gpattern("E8 ? ? ? ? F3 0F 10 05 ? ? ? ? 8D 14 C0 8B 44 24 04 0F B6 0C D5 ? ? ? ? 66 0F 6E C9 0F 5B C9 89 04 D5 ? ? ? ? 0F 2F C1 76 33"), col);
+    plugin::CallDyn(gpattern("E8 ? ? ? ? F3 0F 10 05 ? ? ? ? 8D 14 C0 8B 44 24 04 0F B6 0C D5 ? ? ? ? 66 0F 6E C9 0F 5B C9 89 04 D5 ? ? ? ? 0F 2F C1 76 33 | E8 ? ? ? ? 8B 4C 24 04 F3 0F 10 0D ? ? ? ? 8D 04 C0 03 C0 03 C0 0F B6 94 00 ? ? ? ? 03 C0 F3 0F 2A C2 0F 2F C8 89 88 ? ? ? ? 76 35"), col);
 }
 
 void CFont::SetEdge(float size) {
-    plugin::CallDyn(gpattern("E8 ? ? ? ? F3 0F 10 44 24 ? F3 0F 5E 05 ? ? ? ? 8D 04 C0 C7 04 C5 ? ? ? ? ? ? ? ? F3 0F 11 04 C5"), size);
+    plugin::CallDyn(gpattern("E8 ? ? ? ? F3 0F 10 44 24 ? F3 0F 5E 05 ? ? ? ? 8D 04 C0 C7 04 C5 ? ? ? ? ? ? ? ? F3 0F 11 04 C5 | E8 ? ? ? ? 0F 57 C0 8D 04 C0 03 C0 03 C0 03 C0 F3 0F 11 80 ? ? ? ? F3 0F 10"), size);
 }
 
 void CFont::SetScale(float w, float h) {
@@ -52,7 +52,7 @@ void CFont::SetScale(float w, float h) {
 }
 
 void CFont::SetWrapx(float x, float w) {
-    plugin::CallDyn(gpattern("E8 ? ? ? ? F3 0F 10 44 24 ? 8D 04 C0 F3 0F 11 04 C5 ? ? ? ? F3 0F 10 44 24"), x, w);
+    plugin::CallDyn(gpattern("E8 ? ? ? ? F3 0F 10 44 24 ? 8D 04 C0 F3 0F 11 04 C5 ? ? ? ? F3 0F 10 44 24 | E8 ? ? ? ? F3 0F 10 44 24 04 8D 04 C0 03"), x, w);
 }
 
 void CFont::SetDropShadowPosition(float value) {
@@ -60,15 +60,15 @@ void CFont::SetDropShadowPosition(float value) {
 }
 
 void CFont::SetProportional(bool on) {
-    plugin::CallDyn(gpattern("E8 ? ? ? ? 8D 0C C0 8A 44 24 04 88 04 CD ? ? ? ? C3 CC CC CC CC CC CC CC CC CC CC CC CC 83 EC 08"), on);
+    plugin::CallDyn(gpattern("E8 ? ? ? ? 8D 0C C0 8A 44 24 04 88 04 CD ? ? ? ? C3 CC CC CC CC CC CC CC CC CC CC CC CC 83 EC 08 | E8 ? ? ? ? 8A 4C 24 04 8D 04 C0 88 0C C5 ? ? ? ? C3 CC CC CC CC CC CC CC CC CC CC CC CC E8 0B"), on);
 }
 
 void CFont::DrawFonts() {
-    plugin::CallDyn(gpattern("56 57 E8 ? ? ? ? 8B F0 8B CE"));
+    plugin::CallDyn(gpattern("56 57 E8 ? ? ? ? 8B F0 8B CE | 56 57 E8 ? ? ? ? 8B F0 C1 E0 0B"));
 }
 
 void CFont::SetBackground(bool enable, bool includeWrap) {
-    plugin::CallDyn(gpattern("E8 ? ? ? ? 8D 0C C0 8A 44 24 04 88 04 CD ? ? ? ? 8A 44 24 08"), enable, includeWrap);
+    plugin::CallDyn(gpattern("E8 ? ? ? ? 8D 0C C0 8A 44 24 04 88 04 CD ? ? ? ? 8A 44 24 08 | E8 ? ? ? ? 8A 4C 24 04 8A 54 24"), enable, includeWrap);
 }
 
 int32_t CFont::GetNumberLines(float x, float y, const wchar_t* str, int32_t arg1) {
@@ -88,7 +88,7 @@ void CFont::GetTextRect(rage::Vector4* rect, float x, float y, const wchar_t* st
 }
 
 void CFont::SetLineHeight(float y) {
-    plugin::CallDyn(gpattern("E8 ? ? ? ? F3 0F 10 44 24 ? 8D 04 C0 F3 0F 11 04 C5 ? ? ? ? C3 CC CC CC CC CC CC CC CC E8 ? ? ? ? 8D 0C C0 8B 44 24 04"), y);
+    plugin::CallDyn(gpattern("E8 ? ? ? ? F3 0F 10 44 24 ? 8D 04 C0 F3 0F 11 04 C5 ? ? ? ? C3 CC CC CC CC CC CC CC CC E8 ? ? ? ? 8D 0C C0 8B 44 24 04 | E8 ? ? ? ? F3 0F 10 44 24 04 8D 04 C0 F3 0F 11 04 C5 ? ? ? ? C3 CC CC CC CC CC CC CC CC E8 6B"), y);
 }
 
 void CFont::PrintString(float x, float y, const char* text) {

@@ -12,7 +12,7 @@ int32_t& s_Count = *gpatternt(int32_t, "89 3D ? ? ? ? 5F 89 35 ? ? ? ? A3", 2);
 rage::grcTexturePC*& s_CurrentTexture = *gpatternt(rage::grcTexturePC*, "A3 ? ? ? ? E8 ? ? ? ? C3 CC CC CC CC CC CC CC A1", 1);
 
 uint32_t rage::atStringHash(const char* str, uint32_t initValue) {
-    return plugin::CallAndReturnDyn<uint32_t>(gpattern("8B 54 24 08 53 56 8B 74 24 0C 80 3E 22"), str, initValue);
+    return plugin::CallAndReturnDyn<uint32_t>(gpattern("8B 54 24 08 53 56 8B 74 24 0C 80 3E 22 | 8B 4C 24 08 56 8B 74 24 08 80 3E 22"), str, initValue);
 }
 
 void rage::grcBindTexture(const rage::grcTexture* tex) {

@@ -6,10 +6,10 @@
 */
 #include "CViewport.h"
 
-CViewport& TheViewport = *gpatternt(CViewport, "B9 ? ? ? ? 6A 00 6A 00 C6 05", 1);
+CViewport& TheViewport = *gpatternt(CViewport, "B9 ? ? ? ? 6A 00 6A 00 C6 05 | B9 ? ? ? ? E8 ? ? ? ? 83 CE", 1);
 
 float CViewport::FindAspectRatio(bool wide) {
-    return plugin::CallMethodAndReturnDyn<float, CViewport*>(gpattern("A1 ? ? ? ? 83 EC 14 57"), this, wide);
+    return plugin::CallMethodAndReturnDyn<float, CViewport*>(gpattern("A1 ? ? ? ? 83 EC 14 57 | A1 ? ? ? ? F3 0F 10 05 ? ? ? ? 83 EC"), this, wide);
 }
 
 void CViewport::SetWidescreenBorders(bool on, int32_t delay) {

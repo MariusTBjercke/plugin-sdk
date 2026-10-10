@@ -6,11 +6,11 @@
 */
 #include "audRadioStation.h"
 
-rage::sysArray<audRadioStation*>& audRadioStation::ms_OrderedRadioStations = *gpatternt(rage::sysArray<audRadioStation*>, "8B 3D ? ? ? ? 8D 64 24 00 8B 14 87", 2);
+rage::sysArray<audRadioStation*>& audRadioStation::ms_OrderedRadioStations = *gpatternt(rage::sysArray<audRadioStation*>, "8B 3D ? ? ? ? 8D 64 24 00 8B 14 87 | 04 A3 ? ? ? ? A1 ? ? ? ? 50 B9", 2);
 uint8_t& audRadioStation::sm_NumUnlockedRadioStations = *gpatternt(uint8_t, "C6 05 ? ? ? ? ? C6 05 ? ? ? ? ? C6 05 ? ? ? ? ? C7 05 ? ? ? ? ? ? ? ? BE", 2);
 
-uint32_t& audRadioStation::ms_CurrRadioStationRoll = *gpatternt(uint32_t, "89 0D ? ? ? ? 51 B9 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? 0F B6 C0", 2);
-uint32_t& audRadioStation::ms_CurrRadioStation = *gpatternt(uint32_t, "A3 ? ? ? ? C2 04 00 CC CC CC CC CC CC CC CC CC CC 55", 1);
+uint32_t& audRadioStation::ms_CurrRadioStationRoll = *gpatternt(uint32_t, "89 0D ? ? ? ? 51 B9 ? ? ? ? E8 ? ? ? ? E8 ? ? ? ? 0F B6 C0 | 89 0D ? ? ? ? E8 ? ? ? ? F6", 2);
+uint32_t& audRadioStation::ms_CurrRadioStation = *gpatternt(uint32_t, "A3 ? ? ? ? C2 04 00 CC CC CC CC CC CC CC CC CC CC 55 | 35 ? ? ? ? E8 ? ? ? ? 83 E8", 1);
 
 int32_t& audRadioStation::ms_nState = *gpatternt(int32_t, "C7 05 ? ? ? ? ? ? ? ? 8A C8", 2);
 uint8_t& audRadioStation::ms_RadioOff = *gpatternt(uint8_t, "C6 05 ? ? ? ? ? C3 CC CC CC CC CC CC CC 81 EC", 2);
@@ -24,7 +24,7 @@ audRadioStation* audRadioStation::FindStation(const char* name) {
 }
 
 const char* audRadioStation::GetName(uint32_t index, bool off) {
-    return plugin::CallAndReturnDyn<const char*>(gpattern("53 8A 5C 24 0C 56 8B 74 24 0C 84 DB"), index, off);
+    return plugin::CallAndReturnDyn<const char*>(gpattern("53 8A 5C 24 0C 56 8B 74 24 0C 84 DB | 53 8A 5C 24 0C 84 DB 56 8B 74 24 0C"), index, off);
 }
 
 audRadioStation* audRadioStation::GetStation(uint32_t index) {
@@ -32,5 +32,5 @@ audRadioStation* audRadioStation::GetStation(uint32_t index) {
 }
 
 int32_t audRadioStation::GetNumStations() {
-    return plugin::CallAndReturnDyn<int32_t>(gpattern("E8 ? ? ? ? 39 05 ? ? ? ? 0F 42 05"));
+    return plugin::CallAndReturnDyn<int32_t>(gpattern("E8 ? ? ? ? 39 05 ? ? ? ? 0F 42 05 | E8 ? ? ? ? 8B 0D ? ? ? ? 3B C8 73"));
 }

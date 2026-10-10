@@ -19,11 +19,11 @@ void CSprite2d::Delete() {
 }
 
 void CSprite2d::SetRenderState() {
-    plugin::CallMethodDyn(gpattern("56 8B F1 8B 0D ? ? ? ? FF 36"), this);
+    plugin::CallMethodDyn(gpattern("56 8B F1 8B 0D ? ? ? ? FF 36 | 56 8B F1 8B 06 8B 0D ? ? ? ? 50"), this);
 }
 
 void CSprite2d::ClearRenderState() {
-    plugin::CallDyn(gpattern("FF 35 ? ? ? ? 8B 0D ? ? ? ? FF 35 ? ? ? ? E8 ? ? ? ? FF 35 ? ? ? ? 8B 0D"));
+    plugin::CallDyn(gpattern("FF 35 ? ? ? ? 8B 0D ? ? ? ? FF 35 ? ? ? ? E8 ? ? ? ? FF 35 ? ? ? ? 8B 0D | A1 ? ? ? ? 8B 0D ? ? ? ? 50 51 8B 0D ? ? ? ? E8 ? ? ? ? 8B 15 ? ? ? ? A1"));
 }
 
 void CSprite2d::Draw(rage::Vector2 const& pt1, rage::Vector2 const& pt2, rage::Vector2 const& pt3, rage::Vector2 const& pt4, rage::Color32 const& color) {
@@ -35,7 +35,7 @@ void CSprite2d::Draw(rage::fwRect const& rect, float z, rage::fwRect const& uv, 
 }
 
 void CSprite2d::Draw(rage::fwRect const& rect, rage::Color32 const& color) {
-    plugin::CallDyn(gpattern("8B 44 24 04 6A 00 FF 74 24 0C"), &rect, &color);
+    plugin::CallDyn(gpattern("8B 44 24 04 6A 00 FF 74 24 0C | 8B 44 24 08 D9 E8 6A 00 50 8B 44 24"), &rect, &color);
 }
 
 void CSprite2d::DrawPolygon(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, float z, float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4, rage::Color32 const& color, int32_t pass) {
@@ -51,7 +51,7 @@ void CSprite2d::Draw(rage::fwRect const& rect, rage::fwRect const& uv, rage::Col
 }
 
 void CSprite2d::DrawRect(rage::fwRect const& rect, rage::Color32 const& col) {
-    plugin::CallDyn(gpattern("6A 00 E8 ? ? ? ? 8B 44 24 08 83 C4 04"), &rect, &col);
+    plugin::CallDyn(gpattern("6A 00 E8 ? ? ? ? 8B 44 24 08 83 C4 04 | 6A 00 E8 ? ? ? ? D9 EE 8B 44 24"), &rect, &col);
 }
 
 void CSprite2d::DrawRect(rage::fwRect const& rect, float z, rage::Color32 const& col) {
